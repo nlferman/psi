@@ -1,0 +1,242 @@
+fileFormatVersion: 2
+guid: acd6b1a12db004e45aede0e66a7b7d69
+timeCreated: 1440566649
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: building_sheet_4_by_zetavares852_0
+    21300002: building_sheet_4_by_zetavares852_1
+    21300004: building_sheet_4_by_zetavares852_2
+    21300006: building_sheet_4_by_zetavares852_3
+    21300008: building_sheet_4_by_zetavares852_4
+    21300010: building_sheet_4_by_zetavares852_5
+    21300012: building_sheet_4_by_zetavares852_6
+    21300014: building_sheet_4_by_zetavares852_7
+    21300016: building_sheet_4_by_zetavares852_8
+    21300018: building_sheet_4_by_zetavares852_9
+    21300020: building_sheet_4_by_zetavares852_10
+    21300022: building_sheet_4_by_zetavares852_11
+    21300024: building_sheet_4_by_zetavares852_12
+    21300026: building_sheet_4_by_zetavares852_13
+    21300028: building_sheet_4_by_zetavares852_14
+    21300030: building_sheet_4_by_zetavares852_15
+    21300032: building_sheet_4_by_zetavares852_16
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 128
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: building_sheet_4_by_zetavares852_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 823
+        width: 168
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: building_sheet_4_by_zetavares852_1
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 809
+        width: 99
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: building_sheet_4_by_zetavares852_2
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 809
+        width: 59
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: building_sheet_4_by_zetavares852_3
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 809
+        width: 64
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: building_sheet_4_by_zetavares852_4
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 809
+        width: 99
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: building_sheet_4_by_zetavares852_5
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 796
+        width: 251
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: building_sheet_4_by_zetavares852_6
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 796
+        width: 83
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: building_sheet_4_by_zetavares852_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 712
+        width: 487
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: building_sheet_4_by_zetavares852_8
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 642
+        width: 224
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: building_sheet_4_by_zetavares852_9
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 726
+        width: 64
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: building_sheet_4_by_zetavares852_10
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 726
+        width: 57
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: building_sheet_4_by_zetavares852_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 474
+        width: 93
+        height: 218
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: building_sheet_4_by_zetavares852_12
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 628
+        width: 127
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: building_sheet_4_by_zetavares852_13
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 614
+        width: 106
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: building_sheet_4_by_zetavares852_14
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 617
+        width: 99
+        height: 72
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: building_sheet_4_by_zetavares852_15
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 502
+        width: 194
+        height: 104
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: building_sheet_4_by_zetavares852_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 261
+        width: 168
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
