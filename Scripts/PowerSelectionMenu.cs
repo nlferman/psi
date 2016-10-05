@@ -3,17 +3,15 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class PowerSelectionMenu : MonoBehaviour {
-	//why make these public? you can grab the player and selectorSprite within the script.
-	public GameObject player;
-	public GameObject selectorSprite;
+	//slots are the x positions of each position for the powers in the power selector UI element
+	//EDIT: obsolete, only one power image will be visible at a time
+	//private int[] slots;
 
-	/*obselete
-	public Sprite sprite0;
-	public Sprite sprite1;
-	public Sprite sprite2;
-	public Sprite sprite3;
-	public Sprite sprite4;
-	*/
+	//why make these public? you can grab the player and selectorSprite within the script.
+
+	public int powerCount;
+	public GameObject player;
+	public GameObject selectorObject;
 
 	public GameObject power0;
 	public GameObject power1;
@@ -21,30 +19,57 @@ public class PowerSelectionMenu : MonoBehaviour {
 	public GameObject power3;
 	public GameObject power4;
 
+
+	private SpawnPlatform sP;
 	//key bindings
 	private KeyCode cycleLeftKey = KeyCode.Q;
 	private KeyCode cycleRightKey = KeyCode.E;
 	private KeyCode toggleMenuKey = KeyCode.R;
 	//currently selected power
-	private int curPower = 0;
-	const int POWER_COUNT = 5;  //Consider making this a variable
-	//leftmost power in menu
-	private int leftMostPower = POWER_COUNT - 1;
-	//Sprite[] powerSprites = new Sprite[POWER_COUNT];
-	GameObject[] powerObjects = new GameObject[POWER_COUNT];
+	private int curPower;
+	//Sprite[] powerSprites = new Sprite[powerCount];
+	private GameObject[] powerObjects;
 	//the scripts for each power
-	//GameObject[] powerScripts = new GameObject[POWER_COUNT];
+	//GameObject[] powerScripts = new GameObject[powerCount];
 	//flag for if menu is visilbe
 	bool isVisible = true;
+
+
+	/* don't want to use, can't set the transform of a sprite, it's not a GameObject
+	public Sprite sprite0;
+	public Sprite sprite1;
+	public Sprite sprite2;
+	public Sprite sprite3;
+	public Sprite sprite4;
+	*/
+
+
 	// Use this for initialization
 	void Start () {
+		//see above, slots is obsolete
+		/*slots = new int[powerCount];
+		for (int i = 0; i < powerCount; i++)
+			slots [i] = i * -100;
+*/
+
+		sP = GetComponent<SpawnPlatform> ();
+		curPower = 0;
+		powerObjects = new GameObject[powerCount];
 		//adds the textures for each power
 		//will be modified as powers are added so that the sprite will be pulled directly from the power rather than loaded
-		powerObjects [0] = power0;
-		powerObjects [1] = power1;
-		powerObjects [2] = power2;
-		powerObjects [3] = power3;
-		powerObjects [4] = power4;
+
+		if (powerCount >= 1) 
+			powerObjects [0] = power0;		
+		if (powerCount >= 2)
+			powerObjects [1] = power1;
+		if (powerCount >= 3)
+			powerObjects [2] = power2;
+		if (powerCount >= 4)
+			powerObjects [3] = power3;
+		if (powerCount >= 5)
+			powerObjects [4] = power4;
+
+
 
 		Vector3 powerPosition = Vector3.zero;
 		//Just attatch the sprites and scripts to the object itself, doing it in a script makes no sense
@@ -57,23 +82,35 @@ public class PowerSelectionMenu : MonoBehaviour {
 		powerObjects [4] = setPowerSprite (powerObjects [4], sprite4);
 		*/
 
-		for(int i = 0; i < POWER_COUNT; i++){
-			//add sprites to gameObjects so they can be rendered on screen
+		//PROBLEM 4/4/2016 John R: I don't know if instantiating the powerObject is right here
+		for(int i = 0; i < powerCount; i++) {
+			/*
+			//add spri	tes to gameObjects so they can be rendered on screen
 			GameObject powerObject = powerObjects[i];
-			Image image = powerObject.AddComponent<Image>();
-			image.sprite = powerObjects [i].GetComponent <SpriteRenderer> ().sprite;
+			powerObject.AddComponent<Image>();
+			Image image = powerObject.GetComponent <Image> ();
+			*/
+			//edit John R
+			//GameObject powerObject = Instantiate (powerObjects[i], powerObjects[i].transform.position, powerObjects[i].transform.rotation) as GameObject;
+			//Image image = powerObject0.AddComponent<Image>();
+			//image.sprite = powerObjects [i].GetComponent <Image> ().sprite;
+			///end edit
+
+			//image.sprite = powerObject.GetComponent <SpriteRenderer> ().sprite;
 			//make the PowerSelectionMenu the parent of the power
-			powerObject.transform.SetParent(this.transform);
+
+			powerObjects[i].transform.SetParent (selectorObject.transform);
+			powerObjects [i].transform.localPosition = powerPosition;
 			//posistion the powerSprite relavitve to PowerSelectionMenu
-			powerObject.transform.localPosition = powerPosition;
-			powerPosition.x -= 50;
+			//powerObject.transform.localPosition = powerPosition;
+			//only showing one power at a time:
+			//powerPosition.x -= 100;
 			//adjust the scale of each sprite
-			powerObject.transform.localScale = new Vector3(1f, 1f, 1f);
+			powerObjects[i].transform.localScale = new Vector3(80f, 100f, 1f);
 			//add to the array of powerObjects
-			powerObjects[i] = powerObject;
 		}
 
-
+		//sP.setRealPlatform (powerObjects [0]);
 		//assigning a power script to power
 		//add the spawn platform script to the first power
 
@@ -89,47 +126,48 @@ public class PowerSelectionMenu : MonoBehaviour {
 			}
 			return;
 		}
-		//cylce selector right
-		if(Input.GetKeyDown(cycleRightKey)){
-			cyclePowers(false);
-		}
-		//cylce selector left
+
+		//cycle selector left
 		if(Input.GetKeyDown(cycleLeftKey)){
 			cyclePowers(true);
+		}
+		//cycle selector right
+		if(Input.GetKeyDown(cycleRightKey)){
+			cyclePowers(false);
 		}
 	}
 	void cyclePowers(bool isLeft){
 		//disable current power
 		//TODO
 		//cycle to the left
-		if(isLeft){
-			foreach(GameObject g in powerObjects){
-				//shift each position in the right direction
-				g.transform.position += new Vector3(-50, 0, 0);
+		if (isLeft) {
+			//makes current power in menu invisible, previous power visible in menu
+			powerObjects [curPower].SetActive (false);
+			if (curPower - 1 < 0) {
+				curPower = powerCount - 1;
+			} else {
+				curPower = curPower - 1;
 			}
-			//moves the leftmost power to the far right
-			powerObjects[leftMostPower].transform.position += new Vector3(50 * POWER_COUNT, 0, 0);
-			// if the next leftmost power is less then zero use the max else use the normal decrement
-			leftMostPower = leftMostPower - 1 < 0 ? POWER_COUNT - 1 : leftMostPower - 1;
-			curPower = curPower - 1 < 0 ? POWER_COUNT - 1 : curPower - 1;
-			//cycle to the right
+			powerObjects [curPower].SetActive (true);
+
+			//cycle to the right 
 		}else{
-			foreach(GameObject g in powerObjects){
-				//shift each position in the right direction
-				g.transform.position += new Vector3(50, 0, 0);
+			//makes current power in menu invisible, previous power visible in menu
+			powerObjects [curPower].SetActive (false);
+			if (curPower + 1 > powerCount - 1) {
+				curPower = 0;
+			} else {
+				curPower = curPower + 1;
 			}
-			//moves the rightmost power to the far left
-			powerObjects[curPower].transform.position += new Vector3(-50 * POWER_COUNT, 0, 0);
-			//set the current power as the leftmost
-			leftMostPower = curPower;
-			//leftMostPower = leftMostPower + 1 >= POWER_COUNT - 1 ? 0 : leftMostPower + 1;
-			curPower = curPower + 1 > POWER_COUNT - 1 ? 0 : curPower + 1;
+			powerObjects [curPower].SetActive (true);
 		}
+
+		sP.setRealPlatform (powerObjects [curPower]);
 	}
 
 	/*
-	 //invert the visiblity
-	isVisible = !isVisible;
+	 //invert the vissiblity
+	isVisible = !isVisible; what even is this?
 	//disable each powerObject so it no longer renders
 	foreach(GameObject g in powerObjects){
 		g.SetActive(isVisible);
@@ -141,10 +179,10 @@ public class PowerSelectionMenu : MonoBehaviour {
 		//selectorSprite
 		//make the sprites invisible
 		foreach(GameObject g in powerObjects){
-			g.SetActive(false);
+			//g.SetActive(false);
 		}
 		powerObjects[curPower].SetActive(true);
-		isVisible = false;
+		//isVisible = false;
 	}
 	void toggleMenuOn(){
 		foreach(GameObject g in powerObjects){
