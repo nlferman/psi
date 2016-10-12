@@ -165,7 +165,7 @@ public class PowerSelectionMenu : MonoBehaviour {
 			powerObjects [curPower].SetActive (true);
 		}
 
-		sP.setRealPlatform (powerObjects [curPower]);
+		sP.setReal (powerObjects [curPower]);
 	}
 
 	/*

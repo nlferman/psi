@@ -50,7 +50,7 @@ public class SpawnPlatform : MonoBehaviour {
 		if (ghost.GetComponent<CantSpawn>().getCantSpawn())
 			GameObject.DestroyImmediate (ghost, true);	
 		else
-			RealPlatform ();
+			spawnRealPlatform ();
         pM.canMove = true;
 	}
 
@@ -68,7 +68,7 @@ public class SpawnPlatform : MonoBehaviour {
 		initialPointY = transform.position.y;
 	}
 
-	void RealPlatform() {
+	void spawnRealPlatform() {
 		if (real != null) {
 			GameObject.DestroyImmediate (real, true);
 		}
@@ -108,5 +108,9 @@ public class SpawnPlatform : MonoBehaviour {
 
 		temp.y = Mathf.Clamp (temp.y, (initialPointY - bound), (initialPointY + bound));
 		ghost.transform.position = temp;
+	}
+
+	public void setReal(GameObject plat) {
+		real = plat;
 	}
 }
