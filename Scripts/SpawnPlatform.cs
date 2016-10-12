@@ -4,7 +4,7 @@ using System.Collections;
 public class SpawnPlatform : MonoBehaviour {
 
 	// Setting up the script
-	public GameObject ghostPlat, fallPlat, flPlat;
+	public GameObject ghostPlat, powerPlat, flPlat;
 	public float spawnDist, platMoveSpeed;
 	private GameObject ghost, real;
 	private Animator anim;
@@ -73,7 +73,7 @@ public class SpawnPlatform : MonoBehaviour {
 			GameObject.DestroyImmediate (real, true);
 		}
 
-		real = Instantiate (fallPlat, ghost.transform.position, ghost.transform.rotation) as GameObject;
+		real = Instantiate (powerPlat, ghost.transform.position, ghost.transform.rotation) as GameObject;
 		GameObject.DestroyImmediate (ghost, true);
 	}
 
@@ -110,7 +110,7 @@ public class SpawnPlatform : MonoBehaviour {
 		ghost.transform.position = temp;
 	}
 
-	public void setReal(GameObject plat) {
-		real = plat;
+	public void setPowerPlat(GameObject plat) {
+		powerPlat = plat;
 	}
 }

@@ -109,7 +109,7 @@ public class PowerSelectionMenu : MonoBehaviour {
 			//only showing one power at a time:
 			//powerPosition.x -= 100;
 			//adjust the scale of each sprite
-			powerObjects[i].transform.localScale = new Vector3(80f, 100f, 1f);
+			powerObjects[i].transform.localScale = new Vector3(1f, 1f, 1f);
 			//add to the array of powerObjects
 		}
 
@@ -165,7 +165,7 @@ public class PowerSelectionMenu : MonoBehaviour {
 			powerObjects [curPower].SetActive (true);
 		}
 
-		sP.setReal (powerObjects [curPower]);
+		sP.setPowerPlat (powerObjects [curPower]);
 	}
 
 	/*
