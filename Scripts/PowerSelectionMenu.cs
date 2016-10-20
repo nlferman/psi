@@ -61,17 +61,9 @@ public class PowerSelectionMenu : MonoBehaviour {
 		//adds the textures for each power
 		//will be modified as powers are added so that the sprite will be pulled directly from the power rather than loaded
 
-		if (powerCount >= 1) 
-			powerObjects [0] = power0;		
-		if (powerCount >= 2)
-			powerObjects [1] = power1;
-		if (powerCount >= 3)
-			powerObjects [2] = power2;
-		if (powerCount >= 4)
-			powerObjects [3] = power3;
-		if (powerCount >= 5)
-			powerObjects [4] = power4;
+		loadPowers ();		
 
+		sP.setRealPlatform (powerObjects [0]);
 
 
 		Vector3 powerPosition = Vector3.zero;
@@ -109,7 +101,7 @@ public class PowerSelectionMenu : MonoBehaviour {
 			//only showing one power at a time:
 			//powerPosition.x -= 100;
 			//adjust the scale of each sprite
-			powerObjects[i].transform.localScale = new Vector3(80f, 100f, 1f);
+			powerObjects[i].transform.localScale = new Vector3(1f, 1f, 1f);
 			//add to the array of powerObjects
 		}
 
@@ -187,6 +179,21 @@ public class PowerSelectionMenu : MonoBehaviour {
 		powerObjects[curPower].SetActive(true);
 		//isVisible = false;
 	}
+
+	void loadPowers ()
+	{
+		if (powerCount >= 1)
+			powerObjects [0] = power0;
+		if (powerCount >= 2)
+			powerObjects [1] = power1;
+		if (powerCount >= 3)
+			powerObjects [2] = power2;
+		if (powerCount >= 4)
+			powerObjects [3] = power3;
+		if (powerCount >= 5)
+			powerObjects [4] = power4;
+	}
+
 	void toggleMenuOn(){
 		foreach(GameObject g in powerObjects){
 			g.SetActive(true);
