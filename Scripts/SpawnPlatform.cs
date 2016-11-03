@@ -4,9 +4,9 @@ using System.Collections;
 public class SpawnPlatform : MonoBehaviour {
 
 	// Setting up the script
-	public GameObject ghostPlat, fallPlat, flPlat;
+	public GameObject ghostPlat;
 	public float spawnDist, platMoveSpeed;
-	private GameObject ghost, real;
+	private GameObject ghost, real, previous;
 	private Animator anim;
 
 	private bool spawningPlat = false;
@@ -32,7 +32,7 @@ public class SpawnPlatform : MonoBehaviour {
             pM.canMove = false;
 			myrigidbody2D.velocity = new Vector2(0f, 0f);
 			anim.SetBool ("isFocusing", true);
-			GhostPlatform ();
+			showGhostPlatform ();
 		} else if (Input.GetKeyUp (KeyCode.Z)) {
 			anim.SetBool ("isFocusing", false);
 			DespawnPlat ();
@@ -54,7 +54,7 @@ public class SpawnPlatform : MonoBehaviour {
         pM.canMove = true;
 	}
 
-	void GhostPlatform(){
+	void showGhostPlatform(){
 		if (ghost != null) 
 			GameObject.DestroyImmediate (ghost, true);		
 
@@ -69,11 +69,12 @@ public class SpawnPlatform : MonoBehaviour {
 	}
 
 	void spawnRealPlatform() {
-		if (real.activeSelf == false) {
+		print ("first line of spawnRealPlatform, real exists?" + real != null);
+//		if (previous != null) {
+//			GameObject.DestroyImmediate (previous);
+//		}
+		//if(real != null)
 			real.SetActive (true);
-		}
-
-		real.SetActive (true);
 		print (ghost.transform.position.ToString());
 		real.transform.position = (ghost.transform.position);
 		ghost.SetActive (false);
@@ -113,6 +114,8 @@ public class SpawnPlatform : MonoBehaviour {
 	}
 
 	public void setRealPlatform (GameObject plat) {
+		//previous = real;
 		real = plat;
+		//GameObject.DestroyImmediate (plat);
 	}
 }

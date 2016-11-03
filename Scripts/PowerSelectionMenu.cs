@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
 
 public class PowerSelectionMenu : MonoBehaviour {
 	//slots are the x positions of each position for the powers in the power selector UI element
@@ -16,11 +13,11 @@ public class PowerSelectionMenu : MonoBehaviour {
 	public GameObject player;
 	public GameObject selectorObject;
 
-	public GameObject power0;
-	public GameObject power1;
-	public GameObject power2;
-	public GameObject power3;
-	public GameObject power4;
+	public GameObject power0fab;
+	public GameObject power1fab;
+	public GameObject power2fab;
+	public GameObject power3fab;
+	public GameObject power4fab;
 
 
 	private SpawnPlatform sP;
@@ -31,7 +28,7 @@ public class PowerSelectionMenu : MonoBehaviour {
 	//currently selected power
 	private int curPower;
 	//Sprite[] powerSprites = new Sprite[powerCount];
-	private GameObject[] powerObjects;
+	private GameObject[] powerObjectFabs;
 	//the scripts for each power
 	//GameObject[] powerScripts = new GameObject[powerCount];
 	//flag for if menu is visilbe
@@ -57,13 +54,15 @@ public class PowerSelectionMenu : MonoBehaviour {
 
 		sP = GetComponent<SpawnPlatform> ();
 		curPower = 0;
-		powerObjects = new GameObject[powerCount];
+		powerObjectFabs = new GameObject[powerCount];
 		//adds the textures for each power
 		//will be modified as powers are added so that the sprite will be pulled directly from the power rather than loaded
 
 		loadPowers ();		
 
-		sP.setRealPlatform (powerObjects [0]);
+		GameObject firstReal = Instantiate(powerObjectFabs [0]);
+		firstReal.SetActive(false);
+		sP.setRealPlatform (firstReal);
 
 
 		Vector3 powerPosition = Vector3.zero;
@@ -77,16 +76,16 @@ public class PowerSelectionMenu : MonoBehaviour {
 		powerObjects [4] = setPowerSprite (powerObjects [4], sprite4);
 		*/
 
-		//PROBLEM 4/4/2016 John R: I don't know if instantiating the powerObject is right here
+		/*This loop should be unnessecary, object properties are in the prefabs.
 		for(int i = 0; i < powerCount; i++) {
 			/*
 			//add spri	tes to gameObjects so they can be rendered on screen
 			GameObject powerObject = powerObjects[i];
 			powerObject.AddComponent<Image>();
 			Image image = powerObject.GetComponent <Image> ();
-			*/
+
 			//edit John R
-			//GameObject powerObject = Instantiate (powerObjects[i], powerObjects[i].transform.position, powerObjects[i].transform.rotation) as GameObject;
+			//GameObject powerObject = Instantiate (powerObjectFabs[i]) as GameObject;
 			//Image image = powerObject0.AddComponent<Image>();
 			//image.sprite = powerObjects [i].GetComponent <Image> ().sprite;
 			///end edit
@@ -94,16 +93,17 @@ public class PowerSelectionMenu : MonoBehaviour {
 			//image.sprite = powerObject.GetComponent <SpriteRenderer> ().sprite;
 			//make the PowerSelectionMenu the parent of the power
 
-			powerObjects[i].transform.SetParent (selectorObject.transform);
-			powerObjects [i].transform.localPosition = powerPosition;
+			//powerObjects[i].transform.SetParent (selectorObject.transform);
+			//powerObjects [i].transform.localPosition = powerPosition;
 			//posistion the powerSprite relavitve to PowerSelectionMenu
 			//powerObject.transform.localPosition = powerPosition;
 			//only showing one power at a time:
 			//powerPosition.x -= 100;
 			//adjust the scale of each sprite
-			powerObjects[i].transform.localScale = new Vector3(1f, 1f, 1f);
+			//powerObjects[i].transform.localScale = new Vector3(1f, 1f, 1f);
 			//add to the array of powerObjects
 		}
+		*/
 
 		//sP.setRealPlatform (powerObjects [0]);
 		//assigning a power script to power
@@ -136,28 +136,27 @@ public class PowerSelectionMenu : MonoBehaviour {
 		//TODO
 		//cycle to the left
 		if (isLeft) {
-			//makes current power in menu invisible, previous power visible in menu
-			powerObjects [curPower].SetActive (false);
 			if (curPower - 1 < 0) {
 				curPower = powerCount - 1;
 			} else {
 				curPower = curPower - 1;
 			}
-			powerObjects [curPower].SetActive (true);
+			//sets sprite of selectorObject
+			selectorObject.GetComponent <SpriteRenderer> ().sprite = powerObjectFabs [curPower].GetComponent <SpriteRenderer> ().sprite;
 
 			//cycle to the right 
 		}else{
-			//makes current power in menu invisible, previous power visible in menu
-			powerObjects [curPower].SetActive (false);
 			if (curPower + 1 > powerCount - 1) {
 				curPower = 0;
 			} else {
 				curPower = curPower + 1;
 			}
-			powerObjects [curPower].SetActive (true);
+			//sets sprite of selectorObject
+			selectorObject.GetComponent <SpriteRenderer> ().sprite = powerObjectFabs [curPower].GetComponent <SpriteRenderer> ().sprite;
 		}
 
-		sP.setRealPlatform (powerObjects [curPower]);
+
+		sP.setRealPlatform (Instantiate(powerObjectFabs [curPower]));
 	}
 
 	/*
@@ -173,32 +172,25 @@ public class PowerSelectionMenu : MonoBehaviour {
 	void toggleMenuOff(){
 		//selectorSprite
 		//make the sprites invisible
-		foreach(GameObject g in powerObjects){
-			//g.SetActive(false);
-		}
-		powerObjects[curPower].SetActive(true);
-		//isVisible = false;
+		selectorObject.SetActive(false);
 	}
 
 	void loadPowers ()
 	{
 		if (powerCount >= 1)
-			powerObjects [0] = power0;
+			powerObjectFabs [0] = power0fab;
 		if (powerCount >= 2)
-			powerObjects [1] = power1;
+			powerObjectFabs [1] = power1fab;
 		if (powerCount >= 3)
-			powerObjects [2] = power2;
+			powerObjectFabs [2] = power2fab;
 		if (powerCount >= 4)
-			powerObjects [3] = power3;
+			powerObjectFabs [3] = power3fab;
 		if (powerCount >= 5)
-			powerObjects [4] = power4;
+			powerObjectFabs [4] = power4fab;
 	}
 
 	void toggleMenuOn(){
-		foreach(GameObject g in powerObjects){
-			g.SetActive(true);
-		}
-		isVisible = true;
+		selectorObject.SetActive (true);
 	}
 	/* obselete
 	GameObject setPowerSprite(GameObject powerObject, Sprite sentSprite){
