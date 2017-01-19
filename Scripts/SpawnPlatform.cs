@@ -113,9 +113,7 @@ public class SpawnPlatform : MonoBehaviour {
 		ghost.transform.position = temp;
 	}
 
-	public void setRealPlatform (GameObject plat) {
-		//previous = real;
+	public void setRealPlatform (GameObject plat) {;
 		real = plat;
-		//GameObject.DestroyImmediate (plat);
 	}
 }

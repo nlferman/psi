@@ -19,7 +19,6 @@ public class PowerSelectionMenu : MonoBehaviour {
 	public GameObject power3fab;
 	public GameObject power4fab;
 
-
 	private SpawnPlatform sP;
 	//key bindings
 	private KeyCode cycleLeftKey = KeyCode.Q;
@@ -29,6 +28,7 @@ public class PowerSelectionMenu : MonoBehaviour {
 	private int curPower;
 	//Sprite[] powerSprites = new Sprite[powerCount];
 	private GameObject[] powerObjectFabs;
+	private GameObject[] powerObjectActs;
 	//the scripts for each power
 	//GameObject[] powerScripts = new GameObject[powerCount];
 	//flag for if menu is visilbe
@@ -55,14 +55,13 @@ public class PowerSelectionMenu : MonoBehaviour {
 		sP = GetComponent<SpawnPlatform> ();
 		curPower = 0;
 		powerObjectFabs = new GameObject[powerCount];
+		powerObjectActs = new GameObject[powerCount];
 		//adds the textures for each power
 		//will be modified as powers are added so that the sprite will be pulled directly from the power rather than loaded
 
 		loadPowers ();		
 
-		GameObject firstReal = Instantiate(powerObjectFabs [0]);
-		firstReal.SetActive(false);
-		sP.setRealPlatform (firstReal);
+		sP.setRealPlatform(powerObjectActs [curPower]);
 
 
 		Vector3 powerPosition = Vector3.zero;
@@ -156,7 +155,7 @@ public class PowerSelectionMenu : MonoBehaviour {
 		}
 
 
-		sP.setRealPlatform (Instantiate(powerObjectFabs [curPower]));
+		sP.setRealPlatform (powerObjectActs [curPower]);
 	}
 
 	/*
@@ -177,16 +176,26 @@ public class PowerSelectionMenu : MonoBehaviour {
 
 	void loadPowers ()
 	{
-		if (powerCount >= 1)
-			powerObjectFabs [0] = power0fab;
-		if (powerCount >= 2)
-			powerObjectFabs [1] = power1fab;
-		if (powerCount >= 3)
-			powerObjectFabs [2] = power2fab;
-		if (powerCount >= 4)
-			powerObjectFabs [3] = power3fab;
-		if (powerCount >= 5)
+		if (powerCount >= 5) {
 			powerObjectFabs [4] = power4fab;
+			powerObjectActs [4] = Instantiate (powerObjectFabs[4]);
+		}
+		if (powerCount >= 4) {
+			powerObjectFabs [3] = power3fab;
+			powerObjectActs [3] = Instantiate (powerObjectFabs[3]);
+		}
+		if (powerCount >= 3) {
+			powerObjectFabs [2] = power2fab;
+			powerObjectActs [2] = Instantiate (powerObjectFabs[2]);
+		}
+		if (powerCount >= 2) {
+			powerObjectFabs [1] = power1fab;
+			powerObjectActs [1] = Instantiate (powerObjectFabs[1]);
+		}
+		if (powerCount >= 1) {
+			powerObjectFabs [0] = power0fab;
+			powerObjectActs [0] = Instantiate (powerObjectFabs[0]);
+		}
 	}
 
 	void toggleMenuOn(){
